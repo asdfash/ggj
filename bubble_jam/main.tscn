@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://w3a808tdv4ab"]
+[gd_scene load_steps=8 format=3 uid="uid://w3a808tdv4ab"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ondho"]
 [ext_resource type="PackedScene" uid="uid://b6ri8npxa45ve" path="res://bubble.tscn" id="2_4cf0d"]
@@ -12,9 +12,16 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Curve2D" id="Curve2D_3ucdt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 64, 64, 0, 0, 0, 0, 64, 952)
+}
+point_count = 2
+
 [node name="Main" type="Node"]
 script = ExtResource("1_ondho")
 bubble_scene = ExtResource("2_4cf0d")
+enemy_scene = ExtResource("5_1ilix")
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -36,6 +43,18 @@ position = Vector2(128, 0)
 [node name="Enemy" parent="." instance=ExtResource("5_1ilix")]
 position = Vector2(48, 487)
 
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="EnemyPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_3ucdt")
+
+[node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemyPath"]
+position = Vector2(64, 64)
+rotation = 1.5708
+
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="BubbleSpawnTimer" to="." method="_on_bubble_spawn_timer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="hit" from="Enemy" to="." method="_on_enemy_hit"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
