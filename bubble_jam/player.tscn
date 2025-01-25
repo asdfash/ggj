@@ -1,11 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://do1p3jynlikxg"]
 
+[ext_resource type="Script" path="res://player.gd" id="1_infsa"]
 [ext_resource type="Texture2D" uid="uid://bjniky12w60c6" path="res://assets/Whale/whale_frame_01.png" id="1_o1pdr"]
 [ext_resource type="Texture2D" uid="uid://bq7wihq5adufp" path="res://assets/Whale/whale_frame_down_01.png" id="2_yonyo"]
 [ext_resource type="Texture2D" uid="uid://cbhe7ovi3htsl" path="res://assets/Whale/whale_frame_up_02.png" id="3_ji16m"]
-[ext_resource type="Script" path="res://player.gd" id="4_m4qh3"]
 [ext_resource type="Texture2D" uid="uid://c7gxlt5yshoyw" path="res://assets/ball.png" id="5_eu5eq"]
-[ext_resource type="Script" path="res://squirt.gd" id="5_sme0x"]
 [ext_resource type="AudioStream" uid="uid://by1k5thqa2rh1" path="res://assets/316572__epicwizard__water_paddle_impact_001.wav" id="7_w3ktt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_53bjs"]
@@ -33,18 +32,23 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bpiuj"]
+height = 26.0
+
 [node name="Player" type="RigidBody2D"]
 gravity_scale = 0.0
+script = ExtResource("1_infsa")
+
+[node name="squirtAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_w3ktt")
 
 [node name="player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_53bjs")
 animation = &"up"
-frame_progress = 0.409131
-script = ExtResource("4_m4qh3")
+frame_progress = 0.0858242
 
 [node name="squirt" type="Sprite2D" parent="."]
 texture = ExtResource("5_eu5eq")
-script = ExtResource("5_sme0x")
 
-[node name="squirtAudio" type="AudioStreamPlayer2D" parent="squirt"]
-stream = ExtResource("7_w3ktt")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_bpiuj")
