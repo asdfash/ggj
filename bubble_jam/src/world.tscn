@@ -10,7 +10,7 @@ size = Vector2(36.0001, 1176)
 [node name="world" type="Node2D"]
 
 [node name="playerPaddle" parent="." instance=ExtResource("1_gt12e")]
-position = Vector2(114, 307)
+position = Vector2(100, 326)
 
 [node name="ball" parent="." instance=ExtResource("2_8uoxr")]
 position = Vector2(925, 303)
@@ -35,5 +35,5 @@ position = Vector2(551, 633)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_3rgfu")
 
-[node name="enemyPaddle" parent="." instance=ExtResource("3_0u68n")]
-position = Vector2(1001, 325)
+[node name="enemyPaddle" parent="." groups=["enemy"] instance=ExtResource("3_0u68n")]
+position = Vector2(1050, 325)
