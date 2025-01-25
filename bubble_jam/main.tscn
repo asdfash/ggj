@@ -18,7 +18,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="BubbleSpawnTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 
 [node name="BubblePath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_cpk1q")
