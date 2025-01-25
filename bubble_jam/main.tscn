@@ -1,3 +1,30 @@
-[gd_scene format=3 uid="uid://w3a808tdv4ab"]
+[gd_scene load_steps=4 format=3 uid="uid://w3a808tdv4ab"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ondho"]
+[ext_resource type="PackedScene" uid="uid://b6ri8npxa45ve" path="res://bubble.tscn" id="2_4cf0d"]
+
+[sub_resource type="Curve2D" id="Curve2D_cpk1q"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 1152, 0)
+}
+point_count = 2
 
 [node name="Main" type="Node"]
+script = ExtResource("1_ondho")
+bubble_scene = ExtResource("2_4cf0d")
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="BubbleSpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="BubblePath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_cpk1q")
+
+[node name="BubbleSpawnLocation" type="PathFollow2D" parent="BubblePath"]
+position = Vector2(128, 0)
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="BubbleSpawnTimer" to="." method="_on_bubble_spawn_timer_timeout"]
