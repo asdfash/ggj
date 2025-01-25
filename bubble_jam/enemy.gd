@@ -12,7 +12,8 @@ func _ready() -> void:
 #func _physics_process(delta: float) -> void:
 	#global_position.y  = ball.global_position.y
 
-func _on_body_entered(_body: Node2D):
+
+func _on_area_entered(area: Area2D) -> void:
 	hide() # Player disappears after being hit.
 	hit.emit()
 	# Must be deferred as we can't change physics properties on a physics callback.
