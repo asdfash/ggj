@@ -47,10 +47,10 @@ func _process(delta: float) -> void:
 	player.position += move_vector * delta  # Move player based on input
 
 	# Ensure player stays within screen boundaries
-	if position.y < 0:
-		position.y = 0
-	if position.y > screen_size.y:
-		position.y = screen_size.y
+	if player.position.y < 0:
+		player.position.y = 0
+	if player.position.y > screen_size.y:
+		player.position.y = screen_size.y
 
 	# Handle shooting
 	if Input.is_action_just_pressed("ui_accept") and squirt_speed_current == 0:
