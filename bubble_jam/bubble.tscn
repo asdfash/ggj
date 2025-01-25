@@ -41,7 +41,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Bubble" type="RigidBody2D"]
+[node name="Bubble" type="RigidBody2D" groups=["bubbles"]]
 collision_mask = 0
 script = ExtResource("1_xx8uc")
 

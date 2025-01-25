@@ -5,21 +5,27 @@ var score
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	new_game()
+	#new_game()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 	
 func new_game():
+	get_tree().call_group("bubbles", "queue_free")
 	score = 0
 	$StartTimer.start()
+	#$HUD.update_score(score)
+	$HUD.show_message("Get Ready")
 	
 func game_over():
 	$BubbleSpawnTimer.stop()
+	$HUD.show_game_over()
 	
 func _on_start_timer_timeout() -> void:
 	$BubbleSpawnTimer.start()
+	#$HUD.update_score(score)
 	
 func _on_bubble_spawn_timer_timeout() -> void:
 	# Create a new instance of the Bubble scene.
