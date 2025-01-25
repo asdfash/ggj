@@ -57,14 +57,14 @@ animations = [{
 script = ExtResource("1_3gx2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(18, 34)
+position = Vector2(16, 31)
 shape = SubResource("RectangleShape2D_mk2mb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, 1)
-scale = Vector2(100, 100)
+scale = Vector2(1, 0.96875)
 sprite_frames = SubResource("SpriteFrames_lftjk")
-frame_progress = 0.714909
+frame = 1
+frame_progress = 0.676548
 centered = false
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
