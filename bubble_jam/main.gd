@@ -18,10 +18,12 @@ func new_game():
 	$StartTimer.start()
 	#$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	$BGM.play()
 	
 func game_over():
 	$BubbleSpawnTimer.stop()
 	$HUD.show_game_over()
+	$BGM.stop()
 	
 func _on_start_timer_timeout() -> void:
 	$BubbleSpawnTimer.start()
