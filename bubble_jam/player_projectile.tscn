@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7o3hpeyhnvmt"]
+
+[ext_resource type="Texture2D" uid="uid://gvk71jlmk25s" path="res://assets/Whale/water_projectile_01.png" id="1_mpifk"]
+[ext_resource type="Script" path="res://squirt.gd" id="2_h81r8"]
+[ext_resource type="AudioStream" uid="uid://by1k5thqa2rh1" path="res://assets/316572__epicwizard__water_paddle_impact_001.wav" id="3_rwy1t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2de30"]
+size = Vector2(20, 14)
+
+[node name="PlayerProjectile" type="Area2D"]
+script = ExtResource("2_h81r8")
+
+[node name="squirtAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rwy1t")
+
+[node name="squirt" type="Sprite2D" parent="."]
+texture = ExtResource("1_mpifk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_2de30")

@@ -1,9 +1,9 @@
-extends Node2D
+extends Area2D
 
 var audio : AudioStreamPlayer2D
 var speed = 0  # squirt's speed, starts at 0
 var direction = Vector2(0, 0)  # squirt's direction, no movement at the start
-const squirt_speed = 500  # Constant for the squirt speed
+const squirt_speed = 1500  # Constant for the squirt speed
 
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
@@ -17,10 +17,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Move the squirt based on its speed and direction
 	if speed > 0:
-		position += direction * speed * delta
+		position += direction * squirt_speed * delta
 	# Check if the squirt goes off-screen (left or right)
 	if position.x < 0 or position.x > get_viewport().size.x:
 		reset_squirt()  # Reset squirt when it goes off-screen
+		
 
 # Function to shoot the squirt
 func shoot(player_pos: Vector2) -> void:

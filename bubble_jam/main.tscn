@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://w3a808tdv4ab"]
+[gd_scene load_steps=7 format=3 uid="uid://w3a808tdv4ab"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ondho"]
 [ext_resource type="PackedScene" uid="uid://b6ri8npxa45ve" path="res://bubble.tscn" id="2_4cf0d"]
 [ext_resource type="PackedScene" uid="uid://b5rvo6uv2a165" path="res://hud.tscn" id="3_22gdy"]
 [ext_resource type="PackedScene" uid="uid://do1p3jynlikxg" path="res://player.tscn" id="4_4u7mq"]
+[ext_resource type="PackedScene" uid="uid://ygk6pc8axtve" path="res://enemy.tscn" id="5_1ilix"]
 
 [sub_resource type="Curve2D" id="Curve2D_cpk1q"]
 _data = {
@@ -31,6 +32,8 @@ position = Vector2(128, 0)
 [node name="HUD" parent="." instance=ExtResource("3_22gdy")]
 
 [node name="Player" parent="." instance=ExtResource("4_4u7mq")]
+
+[node name="Enemy" parent="." instance=ExtResource("5_1ilix")]
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="BubbleSpawnTimer" to="." method="_on_bubble_spawn_timer_timeout"]

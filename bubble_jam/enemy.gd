@@ -1,14 +1,18 @@
 extends Area2D
 signal hit
+var screen_size
 #var ball : CharacterBody2D
+@onready var enemy = $AnimatedSprite2D
 
-#func _ready() -> void:
+func _ready() -> void:
+	print(enemy.position)
+	screen_size = get_viewport_rect().size
 	#ball = get_parent().get_node("ball")
 
 #func _physics_process(delta: float) -> void:
 	#global_position.y  = ball.global_position.y
 
-func _on_body_entered(_body: Node2D) -> void:
+func _on_body_entered(_body: Node2D):
 	hide() # Player disappears after being hit.
 	hit.emit()
 	# Must be deferred as we can't change physics properties on a physics callback.
