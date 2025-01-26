@@ -10,7 +10,7 @@ var playing=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#new_game()
-	pass
+	$Player.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 	
 func new_game():
 	get_tree().call_group("bubbles", "queue_free")
+	$BGM.play()
 	score = 0
 	playing = true
 	$StartTimer.start()
@@ -27,10 +28,13 @@ func new_game():
 func game_over():
 	playing = false
 	$BubbleSpawnTimer.stop()
+	$Player.hide()
 	$HUD.show_game_over()
+	$BGM.stop()
 	
 func _on_start_timer_timeout() -> void:
 	$BubbleSpawnTimer.start()
+	$Player.show()
 	enemy_location = 0.5
 	spawn_enemy(enemy_location)
 	#$HUD.update_score(score)
