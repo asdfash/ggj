@@ -24,12 +24,12 @@ func _process(delta: float) -> void:
 		
 
 # Function to shoot the squirt
-func shoot(player_pos: Vector2) -> void:
+func shoot(player_pos: Vector2,dir:Vector2) -> void:
 	# Set the squirt's position to the player's position
 	position = player_pos  # Set the squirt's position to the player
 	# Start the squirt's movement
 	speed = squirt_speed
-	direction = Vector2(-1, 0)  # squirt moves left when shot
+	direction = dir  # squirt moves left when shot
 	set_process(true)  # Start processing to move the squirt
 	audio.play()
 

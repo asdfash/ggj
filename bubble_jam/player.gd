@@ -40,4 +40,4 @@ func _process(delta: float) -> void:
 
 	# Handle shooting
 	if Input.is_action_just_pressed("ui_accept") and squirt.speed == 0:
-		squirt.shoot(player.position)  # Call shoot function of the squirt and pass the player's position
+		squirt.shoot(player.position-Vector2(100,0),Vector2(-1,0))  # Call shoot function of the squirt and pass the player's position

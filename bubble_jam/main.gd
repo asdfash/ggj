@@ -4,6 +4,8 @@ extends Node
 @export var enemy_scene: PackedScene
 
 var score = 0
+var enemy_location = 0.5
+var playing=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,22 +14,25 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	$HUD.update_score(score)
 	
 func new_game():
 	get_tree().call_group("bubbles", "queue_free")
 	score = 0
+	playing = true
 	$StartTimer.start()
 	#$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
 	
 func game_over():
+	playing = false
 	$BubbleSpawnTimer.stop()
 	$HUD.show_game_over()
 	
 func _on_start_timer_timeout() -> void:
 	$BubbleSpawnTimer.start()
-	spawn_enemy(0.5)
+	enemy_location = 0.5
+	spawn_enemy(enemy_location)
 	#$HUD.update_score(score)
 	
 func _on_bubble_spawn_timer_timeout() -> void:
@@ -57,10 +62,15 @@ func _on_bubble_spawn_timer_timeout() -> void:
 
 
 func _on_enemy_hit() -> void:
-	score += 1
-	$HUD.update_score(score)
-	spawn_enemy(randf_range(0.2, 0.8))
-	
+	if playing:
+		score += 1
+		if score>0:
+			game_over()
+		else:
+			enemy_location = randf_range(0.2, 0.8)
+			spawn_enemy(enemy_location)
+
+		
 func spawn_enemy(distance)->void:
 	var enemy = enemy_scene.instantiate()
 	enemy.get_node("CollisionShape2D").disabled = false
