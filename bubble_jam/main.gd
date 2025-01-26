@@ -10,6 +10,7 @@ var player_scale = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#new_game()
+	$MenuBGM.play()
 	$Player.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,7 +19,8 @@ func _process(_delta: float) -> void:
 	
 func new_game():
 	get_tree().call_group("bubbles", "queue_free")
-	$BGM.play()
+	$MenuBGM.stop()
+	$GameBGM.play()
 	score = 0
 	playing = true
 	player_scale = 1
@@ -31,7 +33,8 @@ func game_over():
 	$BubbleSpawnTimer.stop()
 	$Player.hide()
 	$HUD.show_game_over()
-	$BGM.stop()
+	$GameBGM.stop()
+	$MenuBGM.play()
 	
 func _on_start_timer_timeout() -> void:
 	$BubbleSpawnTimer.start()

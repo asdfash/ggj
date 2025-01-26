@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 func show_message(text):
 	$Message.text = text
 	$Message.show()
+	#$Instructions.show()
 	$MessageTimer.start()
 
 
@@ -26,6 +27,8 @@ func show_game_over():
 	
 	$Message.text = "Welcome to BubbleJam!"
 	$Message.show()
+	$Instructions.show()
+	#$Instructions.show()
 	# Make a one-shot timer and wait for it to finish.
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
@@ -37,8 +40,10 @@ func update_score(score):
 
 func _on_start_button_pressed() -> void:
 	$StartButton.hide()
+	$Instructions.hide()
 	start_game.emit()
 
 
 func _on_message_timer_timeout() -> void:
 	$Message.hide()
+	
