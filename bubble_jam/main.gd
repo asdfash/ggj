@@ -17,6 +17,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	$HUD.update_score(score)
+	$HUD.update_life(life)
 	
 func new_game():
 	$MenuBGM.stop()
@@ -36,6 +37,15 @@ func game_over():
 	get_tree().call_group("entitiy","queue_free")
 	$Player.hide()
 	$HUD.show_game_over()
+	$GameBGM.stop()
+	$MenuBGM.play()
+
+func game_won():
+	playing = false
+	$BubbleSpawnTimer.stop()
+	get_tree().call_group("entitiy","queue_free")
+	$Player.hide()
+	$HUD.show_game_won()
 	$GameBGM.stop()
 	$MenuBGM.play()
 	
@@ -76,8 +86,8 @@ func _on_bubble_spawn_timer_timeout() -> void:
 func _on_enemy_hit() -> void:
 	if playing:
 		score += 1
-		if score>10:
-			game_over()
+		if score>=10:
+			game_won()
 		else:
 			spawn_enemy(randf_range(0.1, 0.9))
 
@@ -99,7 +109,7 @@ func grow():
 
 
 func _on_player_hit() -> void:
-	print("hit")
 	life -= 1
+	#$HUD.update_life(life)
 	if life<=0:
 		game_over()

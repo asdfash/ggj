@@ -6,7 +6,7 @@ var direction
 func _ready() -> void:
 	audio = $squirtAudio
 	speed = 500
-	direction = Vector2(1, randf_range(-0.1, 0.1))
+	direction = Vector2(1, randf_range(-0.25, 0.25))
 
 func _process(delta: float) -> void:
 	if speed > 0:

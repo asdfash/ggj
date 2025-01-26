@@ -10,7 +10,7 @@ const squirt_speed = 500
 @onready var enemy = $AnimatedSprite2D
 
 var time_passed = 0.0  # Track the time passed
-const shoot_interval = 0.5  # Shoot every 0.5 seconds
+const shoot_interval = 0.4  # Shoot every 0.5 seconds
 
 func _ready() -> void:
 	audio = get_node("EnemyProjectile/squirtAudio")

@@ -43,6 +43,7 @@ animations = [{
 
 [node name="Bubble" type="RigidBody2D" groups=["entitiy"]]
 collision_mask = 0
+gravity_scale = -1.0
 script = ExtResource("1_xx8uc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

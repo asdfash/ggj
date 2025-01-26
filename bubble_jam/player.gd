@@ -68,4 +68,5 @@ func _on_area_entered(area: Area2D) -> void:
 func shoot(shot_pos) -> void:
 	var new_squirt = squirt_scene.instantiate()
 	new_squirt.position = shot_pos
+	
 	call_deferred("add_child", new_squirt)

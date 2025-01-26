@@ -32,11 +32,26 @@ func show_game_over():
 	# Make a one-shot timer and wait for it to finish.
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
+	
+func show_game_won():
+	show_message("You Won!")
+	# Wait until the MessageTimer has counted down.
+	await $MessageTimer.timeout
+	
+	$Message.text = "Welcome to BubbleJam!"
+	$Message.show()
+	$Instructions.show()
+	#$Instructions.show()
+	# Make a one-shot timer and wait for it to finish.
+	await get_tree().create_timer(1.0).timeout
+	$StartButton.show()
 
 
 func update_score(score):
 	$ScoreLabel.text = str(score)
-	
+
+func update_life(life):
+	$Life.text = "Life:" + str(life)
 
 func _on_start_button_pressed() -> void:
 	$StartButton.hide()

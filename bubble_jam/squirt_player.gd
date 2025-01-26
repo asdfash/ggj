@@ -6,6 +6,7 @@ var direction
 
 func _ready() -> void:
 	audio = $squirtAudio
+	audio.play()
 	speed = 500
 	direction = Vector2(-1,0)
 
