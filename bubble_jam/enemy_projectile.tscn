@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2de30"]
 size = Vector2(20, 14)
 
-[node name="EnemyProjectile" type="Area2D" groups=["enemy", "projectile"]]
+[node name="EnemyProjectile" type="Area2D" groups=["enemy", "entitiy", "projectile"]]
 rotation = 3.14159
 scale = Vector2(0.5, 1)
 script = ExtResource("1_ucspa")

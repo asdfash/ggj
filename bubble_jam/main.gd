@@ -19,7 +19,6 @@ func _process(_delta: float) -> void:
 	$HUD.update_score(score)
 	
 func new_game():
-	get_tree().call_group("bubbles", "queue_free")
 	$MenuBGM.stop()
 	$GameBGM.play()
 	score = 0
@@ -34,6 +33,7 @@ func new_game():
 func game_over():
 	playing = false
 	$BubbleSpawnTimer.stop()
+	get_tree().call_group("entitiy","queue_free")
 	$Player.hide()
 	$HUD.show_game_over()
 	$GameBGM.stop()

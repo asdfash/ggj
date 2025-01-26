@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2de30"]
 size = Vector2(20, 14)
 
-[node name="PlayerProjectile" type="Area2D" groups=["projectile"]]
+[node name="PlayerProjectile" type="Area2D" groups=["entitiy", "projectile"]]
 script = ExtResource("2_h81r8")
 
 [node name="squirtAudio" type="AudioStreamPlayer2D" parent="."]

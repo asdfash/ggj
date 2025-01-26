@@ -54,7 +54,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="Area2D" groups=["enemy"]]
+[node name="Enemy" type="Area2D" groups=["enemy", "entitiy"]]
 script = ExtResource("1_3gx2b")
 squirt_scene = ExtResource("10_dmujk")
 

@@ -16,8 +16,6 @@ func setup():
 	initial_position = Vector2(screen_size.x/1.1, screen_size.y/2)
 	time_passed = SHOOT_INTERVAL
 	player.position = initial_position
-	squirt = get_node("PlayerProjectile")
-	squirt.position = Vector2(-5, -5)
 
 func _ready():
 	setup()

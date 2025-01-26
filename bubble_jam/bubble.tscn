@@ -41,7 +41,7 @@ animations = [{
 "speed": 40.0
 }]
 
-[node name="Bubble" type="RigidBody2D" groups=["bubbles"]]
+[node name="Bubble" type="RigidBody2D" groups=["entitiy"]]
 collision_mask = 0
 script = ExtResource("1_xx8uc")
 
@@ -59,7 +59,7 @@ animation = &"bubble_pop"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="." groups=["bubbles"]]
+[node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_v2sqo")
