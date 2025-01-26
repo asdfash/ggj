@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 	if player.position.y < 0:
 		player.position.y = 0
 	if player.position.y > screen_size.y:
-		player.transformy = screen_size.y
+		player.position.y = screen_size.y
 
 	# Handle shooting
 	if Input.is_action_just_pressed("ui_accept") and squirt.speed == 0:
