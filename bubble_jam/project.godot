@@ -25,7 +25,6 @@ window/stretch/mode="canvas_items"
 
 enemy=""
 projectile=""
-enemy_projectile=""
 
 [input]
 

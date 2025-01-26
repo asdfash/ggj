@@ -6,6 +6,7 @@ extends Node
 var score = 0
 var playing=false
 var player_scale = 1
+var life = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,11 +23,13 @@ func new_game():
 	$MenuBGM.stop()
 	$GameBGM.play()
 	score = 0
+	life = 3
 	playing = true
 	player_scale = 1
 	$Player.scale(Vector2(player_scale,player_scale))
 	$StartTimer.start()
 	$HUD.show_message("Get Ready")
+	
 	
 func game_over():
 	playing = false
@@ -73,10 +76,10 @@ func _on_bubble_spawn_timer_timeout() -> void:
 func _on_enemy_hit() -> void:
 	if playing:
 		score += 1
-		if score>2:
+		if score>10:
 			game_over()
 		else:
-			spawn_enemy(randf_range(0.2, 0.8))
+			spawn_enemy(randf_range(0.1, 0.9))
 
 		
 func spawn_enemy(distance)->void:
@@ -89,7 +92,14 @@ func spawn_enemy(distance)->void:
 	call_deferred("add_child",enemy)
 
 func grow():
-	print(player_scale)
+
 	if player_scale < 3:
 		player_scale += 0.1
 	$Player.scale(Vector2(player_scale,player_scale))
+
+
+func _on_player_hit() -> void:
+	print("hit")
+	life -= 1
+	if life<=0:
+		game_over()

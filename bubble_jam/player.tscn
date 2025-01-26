@@ -6,6 +6,10 @@
 [ext_resource type="Script" path="res://player.gd" id="4_m4qh3"]
 [ext_resource type="PackedScene" uid="uid://c7o3hpeyhnvmt" path="res://player_projectile.tscn" id="5_jlxig"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_at4ih"]
+radius = 11.0
+height = 100.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_53bjs"]
 animations = [{
 "frames": [{
@@ -31,22 +35,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_medgf"]
-height = 102.0
-
-[node name="Player" type="RigidBody2D"]
-collision_mask = 0
-gravity_scale = 0.0
+[node name="Player" type="Area2D"]
 script = ExtResource("4_m4qh3")
+squirt_scene = ExtResource("5_jlxig")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_at4ih")
 
 [node name="player" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_53bjs")
 animation = &"up"
-frame_progress = 0.936937
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visibility_layer = 0
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_medgf")
 
 [node name="PlayerProjectile" parent="." instance=ExtResource("5_jlxig")]
+visible = false
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

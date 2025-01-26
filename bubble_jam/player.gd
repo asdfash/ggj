@@ -1,15 +1,20 @@
-extends Node2D
+extends Area2D
+signal hit
 
 const player_speed = 500  # Speed of the player
 var screen_size
+var time_passed
+const SHOOT_INTERVAL= 2
 var initial_position : Vector2
 var squirt : Area2D  # Reference to the squirt
 @onready var player = $player
-@onready var playerHitbox = $CollisionShape2D
+@onready var playerHitbox = $CollisionPolygon2D
+@export var squirt_scene : PackedScene
 
 func setup():
 	screen_size = get_viewport_rect().size  # Get screen size
 	initial_position = Vector2(screen_size.x/1.1, screen_size.y/2)
+	time_passed = SHOOT_INTERVAL
 	player.position = initial_position
 	squirt = get_node("PlayerProjectile")
 	squirt.position = Vector2(-5, -5)
@@ -20,7 +25,6 @@ func _ready():
 
 func _process(delta: float) -> void:
 	var move_vector = Vector2.ZERO
-	
 	# Handle player movement
 	if visible:
 		if Input.is_action_pressed("player_up"):
@@ -47,10 +51,23 @@ func _process(delta: float) -> void:
 		player.position.y = screen_size.y
 
 	# Handle shooting
-	if Input.is_action_just_pressed("ui_accept") and squirt.speed == 0:
-		squirt.shoot(player.position-Vector2(100,0),Vector2(-1,0))  # Call shoot function of the squirt and pass the player's position
+	if time_passed < SHOOT_INTERVAL:
+		time_passed += delta
+	elif Input.is_action_just_pressed("ui_accept"):
+		time_passed =0.0
+		shoot(player.position-Vector2(100,0))
 
 func scale(player_scale:Vector2):
 	$player.scale = player_scale
-	$CollisionShape2D.scale = player_scale
+	$CollisionPolygon2D.scale = player_scale
 	
+
+func _on_area_entered(area: Area2D) -> void:
+	print(area)
+	if area.is_in_group("projectile") and area.is_in_group("enemy"):
+		hit.emit()
+
+func shoot(shot_pos) -> void:
+	var new_squirt = squirt_scene.instantiate()
+	new_squirt.position = shot_pos
+	call_deferred("add_child", new_squirt)

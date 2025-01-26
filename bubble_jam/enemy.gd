@@ -20,17 +20,16 @@ func _process(delta: float) -> void:
 	time_passed += delta
 	if time_passed >= shoot_interval:
 	#if Input.is_action_pressed("player_shoot"):
-		shoot(enemy.position-Vector2(100,0),Vector2(1,0))
+		shoot(enemy.position+Vector2(100,0))
 		time_passed = 0.0
 		
 func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("projectile"):
+	if area.is_in_group("projectile") and not area.is_in_group("enemy"):
 		hit.emit()
 		$CollisionShape2D.set_deferred("disabled", true)
 		queue_free()
 		
-func shoot(enemy_pos: Vector2,dir:Vector2) -> void:
+func shoot(shot_pos: Vector2) -> void:
 	var new_squirt = squirt_scene.instantiate()
-	print("timerReset")
-	new_squirt.position = enemy_pos
+	new_squirt.position = shot_pos
 	call_deferred("add_child", new_squirt)

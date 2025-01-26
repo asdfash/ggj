@@ -7,7 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2de30"]
 size = Vector2(20, 14)
 
-[node name="EnemyProjectile" type="Area2D" groups=["enemy_projectile"]]
+[node name="EnemyProjectile" type="Area2D" groups=["enemy", "projectile"]]
+rotation = 3.14159
+scale = Vector2(0.5, 1)
 script = ExtResource("1_ucspa")
 
 [node name="squirtAudio" type="AudioStreamPlayer2D" parent="."]
@@ -19,4 +21,7 @@ texture = ExtResource("3_uyphy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2de30")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
