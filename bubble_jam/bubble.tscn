@@ -35,8 +35,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_kemof")
+}, {
+"duration": 1.0,
+"texture": null
 }],
-"loop": true,
+"loop": false,
 "name": &"bubble_pop",
 "speed": 10.0
 }]

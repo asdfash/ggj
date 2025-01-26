@@ -4,8 +4,8 @@ extends Node
 @export var enemy_scene: PackedScene
 
 var score = 0
-var enemy_location = 0.5
 var playing=false
+var player_scale = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,7 +13,7 @@ func _ready() -> void:
 	$Player.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$HUD.update_score(score)
 	
 func new_game():
@@ -21,8 +21,9 @@ func new_game():
 	$BGM.play()
 	score = 0
 	playing = true
+	player_scale = 1
+	$Player.scale(Vector2(player_scale,player_scale))
 	$StartTimer.start()
-	#$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
 	
 func game_over():
@@ -35,8 +36,8 @@ func game_over():
 func _on_start_timer_timeout() -> void:
 	$BubbleSpawnTimer.start()
 	$Player.show()
-	enemy_location = 0.5
-	spawn_enemy(enemy_location)
+
+	spawn_enemy(0.5)
 	#$HUD.update_score(score)
 	
 func _on_bubble_spawn_timer_timeout() -> void:
@@ -60,7 +61,7 @@ func _on_bubble_spawn_timer_timeout() -> void:
 	# Choose the velocity for the bubble.
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
 	bubble.linear_velocity = velocity.rotated(direction)
-	
+	bubble.grow.connect(grow.bind())
 	# Spawn the bubble by adding it to the Main scene.
 	add_child(bubble)
 
@@ -71,8 +72,7 @@ func _on_enemy_hit() -> void:
 		if score>0:
 			game_over()
 		else:
-			enemy_location = randf_range(0.2, 0.8)
-			spawn_enemy(enemy_location)
+			spawn_enemy(randf_range(0.2, 0.8))
 
 		
 func spawn_enemy(distance)->void:
@@ -83,3 +83,7 @@ func spawn_enemy(distance)->void:
 	enemy.position = enemy_spawn_location.position
 	enemy.hit.connect(_on_enemy_hit.bind())
 	call_deferred("add_child",enemy)
+
+func grow():
+	player_scale += 0.1
+	$Player.scale(Vector2(player_scale,player_scale))
