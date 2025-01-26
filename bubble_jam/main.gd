@@ -10,7 +10,7 @@ var playing=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#new_game()
-	pass
+	$Player.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -27,10 +27,13 @@ func new_game():
 func game_over():
 	playing = false
 	$BubbleSpawnTimer.stop()
+	$Player.hide()
 	$HUD.show_game_over()
 	
 func _on_start_timer_timeout() -> void:
 	$BubbleSpawnTimer.start()
+	$Player.show()
+	$Player.setup()
 	enemy_location = 0.5
 	spawn_enemy(enemy_location)
 	#$HUD.update_score(score)
@@ -64,7 +67,7 @@ func _on_bubble_spawn_timer_timeout() -> void:
 func _on_enemy_hit() -> void:
 	if playing:
 		score += 1
-		if score>0:
+		if score>2:
 			game_over()
 		else:
 			enemy_location = randf_range(0.2, 0.8)

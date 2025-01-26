@@ -21,6 +21,10 @@ func _process(delta: float) -> void:
 	# Check if the squirt goes off-screen (left or right)
 	if position.x < 0 or position.x > get_viewport().size.x:
 		reset_squirt()  # Reset squirt when it goes off-screen
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		reset_squirt()
 		
 
 # Function to shoot the squirt
