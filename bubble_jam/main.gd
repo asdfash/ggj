@@ -41,6 +41,7 @@ func _on_start_timer_timeout() -> void:
 	$Player.show()
 
 	spawn_enemy(0.5)
+	$Player.setup()
 	#$HUD.update_score(score)
 	
 func _on_bubble_spawn_timer_timeout() -> void:
@@ -72,7 +73,7 @@ func _on_bubble_spawn_timer_timeout() -> void:
 func _on_enemy_hit() -> void:
 	if playing:
 		score += 1
-		if score>1:
+		if score>2:
 			game_over()
 		else:
 			spawn_enemy(randf_range(0.2, 0.8))
