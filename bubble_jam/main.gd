@@ -69,7 +69,7 @@ func _on_bubble_spawn_timer_timeout() -> void:
 func _on_enemy_hit() -> void:
 	if playing:
 		score += 1
-		if score>0:
+		if score>1:
 			game_over()
 		else:
 			spawn_enemy(randf_range(0.2, 0.8))
@@ -85,5 +85,7 @@ func spawn_enemy(distance)->void:
 	call_deferred("add_child",enemy)
 
 func grow():
-	player_scale += 0.1
+	print(player_scale)
+	if player_scale < 3:
+		player_scale += 0.1
 	$Player.scale(Vector2(player_scale,player_scale))

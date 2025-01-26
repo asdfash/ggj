@@ -43,6 +43,6 @@ func _process(delta: float) -> void:
 		squirt.shoot(player.position-Vector2(100,0),Vector2(-1,0))  # Call shoot function of the squirt and pass the player's position
 
 func scale(player_scale:Vector2):
-	$player.apply_scale(player_scale)
-	$CollisionShape2D.apply_scale(player_scale)
+	$player.scale = player_scale
+	$CollisionShape2D.scale = player_scale
 	

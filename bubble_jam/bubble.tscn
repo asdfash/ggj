@@ -35,13 +35,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_kemof")
-}, {
-"duration": 1.0,
-"texture": null
 }],
 "loop": false,
 "name": &"bubble_pop",
-"speed": 10.0
+"speed": 40.0
 }]
 
 [node name="Bubble" type="RigidBody2D" groups=["bubbles"]]
