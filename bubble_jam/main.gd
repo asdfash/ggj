@@ -3,7 +3,7 @@ extends Node
 @export var bubble_scene: PackedScene
 @export var enemy_scene: PackedScene
 
-var score
+var score = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,6 +27,7 @@ func game_over():
 	
 func _on_start_timer_timeout() -> void:
 	$BubbleSpawnTimer.start()
+	spawn_enemy(0.5)
 	#$HUD.update_score(score)
 	
 func _on_bubble_spawn_timer_timeout() -> void:
@@ -56,34 +57,15 @@ func _on_bubble_spawn_timer_timeout() -> void:
 
 
 func _on_enemy_hit() -> void:
-	print("hit signal received")
-	$EnemySpawnTimer.start()
-
-
-func _on_enemy_spawn_timer_timeout() -> void:
-	print("on enemy hit is called")
-	#get_node("Enemy/CollisionShape2D").set_deferred("disabled", false)
-	#get_node("Enemy").show()
-	#queue_free()
-	#print("queue freed")
-		# Create a new instance of the Bubble scene.
+	score += 1
+	$HUD.update_score(score)
+	spawn_enemy(randf_range(0.2, 0.8))
+	
+func spawn_enemy(distance)->void:
 	var enemy = enemy_scene.instantiate()
-	print("craeted after queue freed")
-	
 	enemy.get_node("CollisionShape2D").disabled = false
-	print("disabled")
-	
-	#enemy.get_node("CollisionShape2D").set_deferred("disabled", false)
-	
-	# Choose a random location on BubblePath.
 	var enemy_spawn_location = $EnemyPath/EnemySpawnLocation
-	enemy_spawn_location.progress_ratio = randf_range(0.4, 0.6)
-	
-	# Set the bubble's position to a random location
+	enemy_spawn_location.progress_ratio = distance
 	enemy.position = enemy_spawn_location.position
-
-	add_child(enemy)
-	print("does it stop here")
-	
-	# Enable this for continuous run to debug
-	#$EnemySpawnTimer.stop()
+	enemy.hit.connect(_on_enemy_hit.bind())
+	call_deferred("add_child",enemy)

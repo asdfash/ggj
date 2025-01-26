@@ -63,8 +63,6 @@ shape = SubResource("RectangleShape2D_mk2mb")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 0.96875)
 sprite_frames = SubResource("SpriteFrames_lftjk")
-frame = 1
-frame_progress = 0.676548
 centered = false
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
